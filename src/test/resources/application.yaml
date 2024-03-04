@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gele_main
+    password: postgres
+    username: postgres
+    driver-class-name: org.postgresql.Driver
+
+file_scanner:
+  root_file_path: src\test\resources\SpringTasksRoot
+
+errors_logger:
+  file_path: src\test\resources\SpringTasksRootErr
+  file_name: errors_log.txt

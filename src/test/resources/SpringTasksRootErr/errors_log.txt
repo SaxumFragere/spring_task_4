@@ -1,0 +1,2 @@
+
+Errors writing to database from file tst.csv: username - petya123, fio - Petrov Petr Petrovich
