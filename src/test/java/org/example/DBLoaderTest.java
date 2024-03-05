@@ -89,7 +89,7 @@ public class DBLoaderTest {
         assertEquals(0, userRepo.count());
         assertEquals(0, loginRepo.count());
 
-        assertFalse(isEmpty(Paths.get("${errors_logger}")));
+        assertFalse(isEmpty(Paths.get("src\\test\\resources\\SpringTasksRootErr")));
     }
 
 }
