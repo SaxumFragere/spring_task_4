@@ -1,7 +1,7 @@
 package org.example;
 
-import org.example.entities.AV_Logins;
-import org.example.entities.AV_Users;
+import org.example.entities.Login;
+import org.example.entities.User;
 import org.example.loggers.actions.LogTransformation;
 import org.example.validators.login.LoginValidator;
 import org.example.validators.user.UserValidator;
@@ -39,7 +39,7 @@ public class ValidatorTest {
 
     @Test
     void userValidator() throws IOException {
-        AV_Users user = new AV_Users(1, "vanya", "Ivanov Ivan Ivanovjch");
+        User user = new User(1, "vanya", "Ivanov Ivan Ivanovjch");
 
         for (var u : userValidators){
             LogTransformation logTransformation = ClassUtils.getUserClass(u).getAnnotation(LogTransformation.class);
@@ -54,7 +54,7 @@ public class ValidatorTest {
     void loginValidator() throws IOException, ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
 
-        AV_Logins login = new AV_Logins(1, formatter.parse("01.01.2000"), 1, "web");
+        Login login = new Login(1, formatter.parse("01.01.2000"), 1, "web");
 
         for (var u : loginValidators){
             LogTransformation logTransformation = ClassUtils.getUserClass(u).getAnnotation(LogTransformation.class);

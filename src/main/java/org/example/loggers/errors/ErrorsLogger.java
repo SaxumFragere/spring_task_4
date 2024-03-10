@@ -1,6 +1,6 @@
 package org.example.loggers.errors;
 
-import org.example.entities.AV_Users;
+import org.example.entities.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ public class ErrorsLogger {
     private String filePath;
     @Value("${errors_logger.file_name}")
     private String fileName;
-    public void log(String fileName, AV_Users user) throws IOException {
+    public void log(String fileName, User user) throws IOException {
         FileWriter fw = new FileWriter(this.filePath + "\\" + this.fileName, true);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.newLine();

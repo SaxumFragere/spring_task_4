@@ -1,7 +1,7 @@
 package org.example.validators.login;
 
-import org.example.entities.AV_Logins;
+import org.example.entities.Login;
 
 public interface LoginValidator {
-    boolean validate(AV_Logins login);
+    boolean validate(Login login);
 }

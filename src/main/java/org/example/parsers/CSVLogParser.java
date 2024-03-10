@@ -1,9 +1,8 @@
 package org.example.parsers;
 
-import lombok.AllArgsConstructor;
 import org.apache.commons.csv.CSVRecord;
-import org.example.entities.AV_Logins;
-import org.example.entities.AV_Users;
+import org.example.entities.Login;
+import org.example.entities.User;
 import org.example.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,20 +20,20 @@ public class CSVLogParser {
         this.userRepo = userRepo;
     }
 
-    public AV_Users parseUser(CSVRecord record){
-        AV_Users dbUser = userRepo.findByUsername(record.get(0));
+    public User parseUser(CSVRecord record){
+        User dbUser = userRepo.findByUsername(record.get(0));
         if (dbUser == null) {
 
-            dbUser = new AV_Users();
+            dbUser = new User();
             dbUser.setUsername(record.get(0));
             dbUser.setFio(record.get(1));
         }
         return dbUser;
     }
-    public AV_Logins parseLogin(CSVRecord record){
-        AV_Logins dbLogin = new AV_Logins();
+    public Login parseLogin(CSVRecord record){
+        Login dbLogin = new Login();
         try {
-            dbLogin.setAccess_date(formatter.parse(record.get(2)));
+            dbLogin.setAccessDate(formatter.parse(record.get(2)));
         } catch(ParseException e) {}
 
         dbLogin.setApplication(record.get(3));

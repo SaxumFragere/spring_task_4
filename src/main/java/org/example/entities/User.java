@@ -6,29 +6,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AV_Logins {
+@Table(name = "av_users")
+public class User {
     @Id
-    @SequenceGenerator(name = "sequence", sequenceName = "av_logins_seq", allocationSize = 1)
+    @SequenceGenerator(name = "sequence", sequenceName = "av_users_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence")
     int id;
-    Date access_date;
-    int user_id;
-    String application;
+    String username;
+    String fio;
 
     @Override
     public String toString() {
-        return "AV_Logins{" +
+        return "User{" +
                 "id=" + id +
-                ", access_date=" + access_date +
-                ", user_id=" + user_id +
-                ", application='" + application + '\'' +
+                ", username='" + username + '\'' +
+                ", fio='" + fio + '\'' +
                 '}';
     }
 }

@@ -3,8 +3,8 @@ package org.example;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.example.entities.AV_Logins;
-import org.example.entities.AV_Users;
+import org.example.entities.Login;
+import org.example.entities.User;
 import org.example.parsers.CSVLogParser;
 import org.example.repos.UserRepo;
 import org.junit.jupiter.api.Assertions;
@@ -30,7 +30,7 @@ public class CSVLogParserTest {
     void parseUser() throws IOException {
         CSVRecord record = CSVParser.parse("petya123;Petrov Petr Petrovich;01.01.2000;web", csvFormat).getRecords().get(0);
         when(userRepo.findByUsername("petya123")).thenReturn(null);
-        AV_Users dbUser = csvLogParser.parseUser(record);
+        User dbUser = csvLogParser.parseUser(record);
         Assertions.assertEquals("petya123", dbUser.getUsername());
         Assertions.assertEquals("Petrov Petr Petrovich", dbUser.getFio());
     }
@@ -39,8 +39,8 @@ public class CSVLogParserTest {
     void parseLogin() throws IOException, ParseException {
         CSVRecord record = CSVParser.parse("petya123;Petrov Petr Petrovich;01.01.2000;web", csvFormat).getRecords().get(0);
         when(userRepo.findByUsername("petya123")).thenReturn(null);
-        AV_Logins login = csvLogParser.parseLogin(record);
-        Assertions.assertEquals(formatter.parse("01.01.2000"),login.getAccess_date());
+        Login login = csvLogParser.parseLogin(record);
+        Assertions.assertEquals(formatter.parse("01.01.2000"),login.getAccessDate());
         Assertions.assertEquals("web", login.getApplication());
     }
 

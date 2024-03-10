@@ -1,6 +1,6 @@
 package org.example.validators.user;
 
-import org.example.entities.AV_Users;
+import org.example.entities.User;
 import org.example.loggers.actions.LogTransformation;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @LogTransformation("C:\\SpringTasksRootVal\\user_log.txt")
 public class FioUserValidator implements UserValidator {
 
-    public boolean validate(AV_Users user){
+    public boolean validate(User user){
         String fio = user.getFio();
 
         StringBuilder stringBuilder = new StringBuilder();

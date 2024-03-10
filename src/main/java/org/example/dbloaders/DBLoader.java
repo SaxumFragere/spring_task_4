@@ -2,15 +2,14 @@ package org.example.dbloaders;
 
 import lombok.AllArgsConstructor;
 import org.apache.commons.csv.CSVRecord;
-import org.example.entities.AV_Logins;
-import org.example.entities.AV_Users;
+import org.example.entities.Login;
+import org.example.entities.User;
 import org.example.loggers.errors.ErrorsLogger;
 import org.example.parsers.CSVLogParser;
 import org.example.repos.LoginRepo;
 import org.example.repos.UserRepo;
 import org.example.validators.login.LoginValidator;
 import org.example.validators.user.UserValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -34,15 +33,15 @@ public class DBLoader {
 
             for (CSVRecord record : records) {
 
-                AV_Users dbUser = csvLogParser.parseUser(record);
+                User dbUser = csvLogParser.parseUser(record);
                 boolean userValid = validateUser(dbUser);
 
-                AV_Logins dbLogin = csvLogParser.parseLogin(record);
+                Login dbLogin = csvLogParser.parseLogin(record);
                 boolean loginValid = validateLogin(dbLogin);
 
                 if (loginValid && userValid) {
                     userRepo.save(dbUser);
-                    dbLogin.setUser_id(dbUser.getId());
+                    dbLogin.setUserId(dbUser.getId());
                     loginRepo.save(dbLogin);
                 } else {
                     errorsLogger.log(fileName, dbUser);
@@ -52,7 +51,7 @@ public class DBLoader {
         }
     }
 
-    private boolean validateUser(AV_Users dbUser){
+    private boolean validateUser(User dbUser){
         boolean userValid = true;
         for (UserValidator u : userValidators) {
             userValid = u.validate(dbUser);
@@ -61,7 +60,7 @@ public class DBLoader {
         return userValid;
     }
 
-    private boolean validateLogin(AV_Logins dbLogin){
+    private boolean validateLogin(Login dbLogin){
         boolean loginValid = true;
         for (LoginValidator lv : loginValidators) {
             loginValid = lv.validate(dbLogin);

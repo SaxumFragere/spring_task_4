@@ -6,13 +6,12 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.example.dbloaders.DBLoader;
-import org.example.entities.AV_Users;
+import org.example.entities.User;
 import org.example.repos.LoginRepo;
 import org.example.repos.UserRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
@@ -68,7 +67,7 @@ public class DBLoaderTest {
         filesContent.put(fileName, csvRecords);
         dbLoader.loadToDataBase(filesContent);
 
-        AV_Users user = userRepo.findByUsername("petya123");
+        User user = userRepo.findByUsername("petya123");
         assertThat(user).isNotNull();
         assertEquals(1, loginRepo.count());
     }
